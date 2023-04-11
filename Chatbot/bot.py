@@ -12,7 +12,7 @@ import random
 import discord
 
 #****************************************DISCORD TOKEN***********************************************************#
-TOKEN = 'MTA5NDY4NDY2NDM1MTk1Mjg5Ng.GqAJz3.4onu6ZH4K1cjlhq0_KplSA2rfXS014jDO0qj4Q'
+TOKEN = 
 
 #*****************************************OPEN AND LOAD JSON*****************************************************#
 with open('intents.json',encoding='utf-8') as file:
