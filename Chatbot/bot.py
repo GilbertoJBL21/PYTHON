@@ -11,6 +11,9 @@ import numpy
 import random
 import discord
 
+#****************************************DISCORD TOKEN***********************************************************#
+TOKEN = 'MTA5NDY4NDY2NDM1MTk1Mjg5Ng.GqAJz3.4onu6ZH4K1cjlhq0_KplSA2rfXS014jDO0qj4Q'
+
 #*****************************************OPEN AND LOAD JSON*****************************************************#
 with open('intents.json',encoding='utf-8') as file:
     data = json.load(file)
@@ -73,8 +76,8 @@ except:
 tensorflow.compat.v1.reset_default_graph()
 
 net = tflearn.input_data(shape=[None,len(training[0])])
-net = tflearn.fully_connected(net, 8)
-net = tflearn.fully_connected(net, 8)
+net = tflearn.fully_connected(net, 10)
+net = tflearn.fully_connected(net, 10)
 net = tflearn.fully_connected(net,len(output[0]),activation="softmax")
 net = tflearn.regression(net)
 
@@ -83,26 +86,35 @@ model = tflearn.DNN(net)
 try:
     model.load("model.tflearn")
 except:
-    model.fit(training,output,n_epoch=10000,batch_size=24, show_metric=True)
+    model.fit(training,output,n_epoch=10000,batch_size=29, show_metric=True)
     model.save("model.tflearn")
 
-#*************************************************CHAT***********************************************************************#
-def chat():
-    while True:
-        inpt = input("Your: ")
-        tray = [0 for _ in range(len(words))]
-        input_processed = nltk.word_tokenize(inpt)
-        input_processed = [stemmer.stem(word.lower()) for word in input_processed]
-        for single_word in input_processed:
-            for i, word in enumerate(words):
-                if word == single_word:
-                    tray[i] = 1
-        result = model.predict([numpy.array(tray)])
-        index_results = numpy.argmax(result)
-        tag = tags[index_results]
-        for tagAux in data["intents"]:
-            if tagAux["tag"] == tag:
-                response = tagAux["responses"]
-        print ("Bot: ", random.choice(response))
-chat()
+#*******************************************************CONNECT TO DISCORD**************************************************#
 
+
+
+def chat():
+    intents = discord.Intents.default()
+    client = discord.Client(intents=intents)  
+    global TOKEN
+    while True:
+        @client.event
+        async def on_message(mess):
+            if mess.author == client.user:
+                return
+            tray = [0 for _ in range(len(words))]
+            input_processed = nltk.word_tokenize(mess.content)
+            input_processed = [stemmer.stem(word.lower()) for word in input_processed]
+            for single_word in input_processed:
+                for i, word in enumerate(words):
+                    if word == single_word:
+                        tray[i] = 1
+            result = model.predict([numpy.array(tray)])
+            index_results = numpy.argmax(result)
+            tag = tags[index_results]
+            for tagAux in data["intents"]:
+                if tagAux["tag"] == tag:
+                    response = tagAux["responses"]
+            await mess.channel.send(random.choice(response))
+        client.run(TOKEN)
+chat()

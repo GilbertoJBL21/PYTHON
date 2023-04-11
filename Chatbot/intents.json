@@ -1,76 +1,63 @@
 {
     "intents": [
         {
-            "tag": "saludos",
+            "tag": "greetings",
             "patterns": [
-                "hola",
-                "buenos dias",
-                "buenas tardes",
-                "buenas noches",
-                "como estas",
-                "hay alguien ahi?",
+                "hello",
+                "good morning",
+                "Good afternoon",
+                "good night",
+                "how are you",
+                "anyone there?",
                 "hey",
-                "saludos",
-                "que tal"
+                "greetings",
+                "how are you"
             ],
             "responses": [
-                "hola, en que puedo ayudarte"
+                "Hello how can I help you"
             ],
             "context": [
                 ""
             ]
         },
         {
-            "tag": "despedidas",
+            "tag": "farewells",
             "patterns": [
-                "chao",
-                "adios",
-                "hasta luego",
-                "nos vemos",
                 "bye",
-                "hasta pronto",
-                "hasta la proxima"
+                "bye bye",
+                "see you later",
+                "see you",
+                "bye",
+                "see you soon",
+                "until next time"
             ],
             "responses": [
-                "hasta luego, tenga un buen dia",
-                "ha sido un placer, vuelva pronto"
+                "see you later, have a nice day",
+                "It has been a pleasure, come back soon"
             ],
             "context": [
                 ""
             ]
         },
         {
-            "tag": "agradecimientos",
-            "patterns": [
-                "gracias",
-                "muchas gracias",
-                "mil gracias",
-                "muy amable",
-                "se lo agradezco",
-                "fue de ayuda",
-                "gracias por la ayuda",
-                "muy agradecido",
-                "gracias por su tiempo",
+            "tag": "thanks",
+            "patterns":[
+                "thank you",
+                "thank you so much",
+                "thank you",
+                "very kind",
+                "thank you",
+                "it was helpful",
+                "very thankful",
+                "Thanks for your time",
                 "ty"
             ],
             "responses": [
-                "de nada",
-                "feliz por ayudarlo",
-                "gracias a usted",
-                "estamos para servirle",
-                "fue un placer"
-            ],
-            "context": [
-                ""
-            ]
-        },
-        {
-            "tag": "norespuesta",
-            "patterns": [
-                ""
-            ],
-            "responses": [
-                "no se detecto una respuesta"
+                "you are welcome",
+                "happy to help you",
+                "thank you",
+                "we're at your service",
+                "it was a pleasure"
             ],
             "context": [
                 ""
